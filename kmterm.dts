@@ -1,0 +1,40 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+    compatible = "brcm,bcm2708";
+
+    fragment@0 {
+        target = <&spidev0>;
+
+        __overlay__ {
+            status = "disabled";
+        };
+    };
+
+    fragment@1 {
+        target = <&spi0>;
+
+        __overlay__ {
+            status = "okay";
+
+            kmterm {
+                compatible = "astrekoz,kmterm";
+                spi-max-frequency = <125000000>;
+                status = "okay";
+
+				driver = "ili9225";
+				dev_name = "kmterm";
+				spi_name = "kmterm";
+				#spi_maxspeed = <50000000>;
+				#spi_busnum = <0>;
+				#spi_cs = <0>;
+				#spi_mode = <0>;
+				#display_width = <176>;
+				#display_height = <220>;
+				#gpio_dc = <23>;
+				#gpio_rst = <24>;
+            };
+        };
+    };
+};
